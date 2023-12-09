@@ -1,4 +1,6 @@
 *.fa.gz
+*.fa.gz.fai
+*.fa.gz.gzi
 *.fa.gz.paf
 *.fa.gz.seqwish.gfa
 *.fa.gz.smoothxg.gfa
