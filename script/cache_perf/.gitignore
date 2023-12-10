@@ -1,0 +1,4 @@
+# intermediate file
+wfmash-*
+# log files
+*.log
