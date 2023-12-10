@@ -21,3 +21,12 @@ wfmash \
     --threads 6 \
      \
     -n 49 -s 5000 -p 90  -X  -l 25000 -k 19 -H 0.001 > ${ECOLI50_PAF}
+
+# scerevisiae8
+wfmash \
+    scerevisiae8.fa.gz \
+    scerevisiae8.fa.gz \
+     \
+    --threads 6 \
+     \
+    -n 7 -s 5000 -p 90  -X  -l 25000 -k 19 -H 0.001 > scerevisiae8.fa.gz.paf

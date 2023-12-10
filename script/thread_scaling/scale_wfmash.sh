@@ -16,8 +16,9 @@ PAF_FILE="${DATASET_DIR}/${PANGENOME}/${PANGENOME}.fa.gz.paf"
 LOG_DIR="/work/shared/users/phd/jl4257/Course/CS6230/characterize_pggb/script/thread_scaling"
 LOG_FILE=${LOG_DIR}/wfmash_${PANGENOME}.log
 
-if [ ! -d ${LOG_DIR} ]; then
-    mkdir -p ${LOG_DIR}
+# if LOG_FILE exists, remove it
+if [ -f ${LOG_FILE} ]; then
+    rm ${LOG_FILE}
 fi
 
 # test run time using different number of threads
@@ -28,7 +29,7 @@ if [ ${PANGENOME} = "DRB1-3123" ]; then
     # DRB1-3123
     for num_threads in "${thread_list[@]}";
     do
-        echo "========= Running wfmash with ${num_threads} threads ========="
+        echo "========= Running wfmash with ${num_threads} threads =========" 2>&1 | tee -a ${LOG_FILE}
         { time wfmash \
             ${FA_FILE} \
             ${FA_FILE} \
