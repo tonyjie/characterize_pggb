@@ -4,7 +4,11 @@ import matplotlib.pyplot as plt
 # num_threads
 x = [1, 2, 4, 8, 16, 32]
 # run time
-y = [3200, 1600, 1100, 552, 283, 152] 
+# DRB1-3123 in seconds
+y = [2.063, 1.545, 1.049, 1.057, 1.071, 1.075]
+
+
+# y = [3200, 2113, 1100, 552, 283, 152] # threads=1 not set yet.  
 
 # Creating the plot
 plt.style.use('ggplot')  # Using a fancy style for the plot
@@ -19,12 +23,12 @@ plt.ylabel("Run Time (seconds)")
 # Fix the xticks
 plt.xticks(x, x)
 # Fix the yticks
-yticks = [100, 200, 400, 800, 1600, 3200]
-plt.yticks(yticks, yticks)
+# yticks = [100, 200, 400, 800, 1600, 3200]
+# plt.yticks(yticks, yticks)
 
 # Adding grid for better readability
 plt.grid(True)
 
 # Showing the plot
 plt.tight_layout()
-plt.savefig("wfmash_scale_ecoli.pdf")
+plt.savefig("wfmash_scale_DRB1-3123.pdf")
