@@ -1,13 +1,12 @@
 # Thread scaling test for wfmash: Run wfmash with different number of threads
 
-PANGENOME=$1 # option: "DRB1-3123" or "ecoli50"
+PANGENOME=$1 # option: "DRB1-3123" or "ecoli50" or "scerevisiae8"
 
 # if others, echo error message and exit
-if [ ${PANGENOME} != "DRB1-3123" ] && [ ${PANGENOME} != "ecoli50" ]; then
-    echo "Error: PANGENOME should be DRB1-3123 or ecoli50"
+if [ ${PANGENOME} != "DRB1-3123" ] && [ ${PANGENOME} != "ecoli50" ] && [ ${PANGENOME} != "scerevisiae8"] ; then
+    echo "Error: PANGENOME should be DRB1-3123 or ecoli50 or scerevisiae8"
     exit 1
 fi
-
 
 DATASET_DIR="/work/shared/users/phd/jl4257/Course/CS6230/characterize_pggb/dataset"
 FA_FILE="${DATASET_DIR}/${PANGENOME}/${PANGENOME}.fa.gz"
@@ -54,3 +53,17 @@ if [ ${PANGENOME} = "ecoli50" ]; then
     done
 fi
 
+# if PANGENOME="scerevisiae8"
+if [ ${PANGENOME} = "scerevisiae8" ]; then
+    # scerevisiae8
+    for num_threads in "${thread_list[@]}";
+    do
+        echo "Running wfmash with ${num_threads} threads"
+        { time wfmash \
+            ${FA_FILE} \
+            ${FA_FILE} \
+            --threads ${num_threads} \
+            -n 7 -s 5000 -p 90  -X  -l 25000 -k 19 -H 0.001 > ${PAF_FILE} ; } \
+            2>&1 | tee -a ${LOG_FILE}
+    done
+fi
