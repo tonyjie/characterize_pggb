@@ -4,12 +4,14 @@ fig, axs = plt.subplots(1, 3)
 
 labels = {
     'DRB1-3123' : ['Retiring', 'Front-End Bound', 'Bad Speculation', 'Memory Bound', 'Core Bound'],
+    'scerevisiae8' : ['Retiring', 'Front-End Bound', 'Bad Speculation', 'Memory Bound', 'Core Bound'],
     'ecoli50' : ['Retiring', 'Front-End Bound', 'Bad Speculation', 'Memory Bound', 'Core Bound'],
 }
 
 # for wfmash results profiled by VTune
 data = {
     'DRB1-3123' : [30.8, 21.2, 8.2, 8.3, 31.5],
+    'scerevisiae8' : [48.5, 23.0, 11.1, 5.7, 11.7],
     'ecoli50' : [42.9, 20.7, 11.9, 9.1, 15.4]
 }
 
@@ -47,4 +49,4 @@ for bs in labels.keys():
 
     plt.setp(autotexts, color='w', size=28)
     plt.tight_layout()
-    plt.savefig(f'workload_microarch_{bs}.pdf', dpi=300, bbox_inches='tight')
+    plt.savefig(f'wfmash_microarch_{bs}.pdf', dpi=300, bbox_inches='tight')

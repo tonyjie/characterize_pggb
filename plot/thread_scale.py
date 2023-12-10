@@ -7,7 +7,11 @@ x = [1, 2, 4, 8, 16, 32]
 ## ======= wfmash ========
 # run time
 # DRB1-3123 in seconds
-y = [2.055, 1.638, 1.047, 1.128, 1.061, 1.062]
+# y = [2.055, 1.638, 1.047, 1.128, 1.061, 1.062]
+
+# scerevisiae8 in seconds
+y = [405.165, 211.009, 113.431, 55.847, 29.858, 17.328]
+
 
 # ecoli-50 in minutes
 # [209m4.639s, 106m47.432s, 55m20.311s, 27m41.845s, 14m1.900s, 7m19.374s]
@@ -38,5 +42,6 @@ plt.grid(True)
 
 # Showing the plot
 plt.tight_layout()
-plt.savefig("wfmash_scale_DRB1-3123.pdf")
+# plt.savefig("wfmash_scale_DRB1-3123.pdf")
+plt.savefig("wfmash_scale_scerevisiae8.pdf")
 # plt.savefig("wfmash_scale_ecoli50.pdf")
