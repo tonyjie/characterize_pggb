@@ -1,3 +1,5 @@
+# Description: Plot the thread scale of wfmash
+
 import matplotlib.pyplot as plt
 
 # Data
