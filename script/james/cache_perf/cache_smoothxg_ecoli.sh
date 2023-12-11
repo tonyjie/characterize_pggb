@@ -1,0 +1,54 @@
+# use Perf to check cache performance
+PERF_COMMAND="perf stat -e cycles,cycle_activity.stalls_mem_any,cycle_activity.stalls_total \
+                -e cache-misses,cache-references,L1-dcache-loads,L1-dcache-load-misses,L1-dcache-stores \
+                -e LLC-loads,LLC-load-misses,LLC-stores,LLC-store-misses"
+# option: "DRB1-3123" or "ecoli50"
+
+PANGENOME="ecoli50"  
+
+# if others, echo error message and exit
+
+# if [ ${PANGENOME} != "DRB1-3123" ] && [ ${PANGENOME} != "ecoli50" ]; then
+#     echo "Error: PANGENOME should be DRB1-3123 or ecoli50"
+#     exit 1
+# fi
+
+DATASET_DIR="/home/bc526/characterize_pggb/dataset"
+FA_FILE="${DATASET_DIR}/${PANGENOME}/${PANGENOME}.fa.gz"
+PAF_FILE="${DATASET_DIR}/${PANGENOME}/${PANGENOME}.fa.gz.paf"
+
+LOG_DIR="/home/bc526/characterize_pggb/script/cache_perf_ecoli50_32t_smoothxg"
+LOG_FILE=${LOG_DIR}/smoothxg_${PANGENOME}.log
+
+if [ ! -d ${LOG_DIR} ]; then
+    mkdir -p ${LOG_DIR}
+fi
+
+NUM_THREADS=32
+
+
+if [ ${PANGENOME} = "ecoli50" ]; then
+
+    program="./smoothxg  \
+    --threads=${NUM_THREADS} \
+    --gfa-in=/home/bc526/characterize_pggb/dataset/ecoli50/ecoli50.fa.gz.smoothxg.gfa\
+    --smoothed-out=ecoli50.fa.gz.smoothxg.gfa \
+    -T 2 -r 12 -P 1,19,39,3,81,1 -V   -X 100 -I 0.9 -R 0 -j 0 -e 0 -l 700,900,1100 -O 0.001 -Y 1200 -d 0 -D 0"
+fi
+
+
+
+
+# # if PANGENOME="ecoli50"
+# if [ ${PANGENOME} = "ecoli50" ]; then
+#     # ecoli-50
+#     program="./seqwish \
+#         --paf-alns="${PAF_FILE}" \
+#         --seqs="${FA_FILE}" \
+#         --threads ${NUM_THREADS} \
+
+#         -k 19 -f 0 -B 10000000 -P"
+# fi
+
+set -x
+${PERF_COMMAND}  ${program} 2>&1 | tee -a ${LOG_FILE}
