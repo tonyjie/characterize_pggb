@@ -1,0 +1,175 @@
+Elapsed Time: 1834.403s
+    IPC: 0.899
+     | The IPC may be too low. This could be caused by issues such as memory
+     | stalls, instruction starvation, branch misprediction or long latency
+     | instructions. Explore the other hardware-related metrics to identify what
+     | is causing low IPC.
+     |
+    SP GFLOPS: 0.000
+    DP GFLOPS: 0.055
+    x87 GFLOPS: 0.029
+    Average CPU Frequency: 3.681 GHz
+Logical Core Utilization: 6.7% (2.135 out of 32)
+ | The metric value is low, which may signal a poor logical CPU cores
+ | utilization. Consider improving physical core utilization as the first step
+ | and then look at opportunities to utilize logical cores, which in some cases
+ | can improve processor throughput and overall performance of multi-threaded
+ | applications.
+ |
+    Physical Core Utilization: 6.7% (2.136 out of 32)
+     | The metric value is low, which may signal a poor physical CPU cores
+     | utilization caused by:
+     |     - load imbalance
+     |     - threading runtime overhead
+     |     - contended synchronization
+     |     - thread/process underutilization
+     |     - incorrect affinity that utilizes logical cores instead of physical
+     |       cores
+     | Run the HPC Performance Characterization analysis to estimate the
+     | efficiency of MPI and OpenMP parallelism or run the Locks and Waits
+     | analysis to identify parallel bottlenecks for other parallel runtimes.
+     |
+Microarchitecture Usage: 29.5% of Pipeline Slots
+ | You code efficiency on this platform is too low.
+ | 
+ | Possible cause: memory stalls, instruction starvation, branch misprediction
+ | or long latency instructions.
+ | 
+ | Next steps: Run Microarchitecture Exploration analysis to identify the cause
+ | of the low microarchitecture usage efficiency.
+ |
+    Retiring: 29.5% of Pipeline Slots
+    Front-End Bound: 11.8% of Pipeline Slots
+    Bad Speculation: 2.7% of Pipeline Slots
+    Back-End Bound: 56.0% of Pipeline Slots
+     | A significant portion of pipeline slots are remaining empty. When
+     | operations take too long in the back-end, they introduce bubbles in the
+     | pipeline that ultimately cause fewer pipeline slots containing useful
+     | work to be retired per cycle than the machine is capable to support. This
+     | opportunity cost results in slower execution. Long-latency operations
+     | like divides and memory operations can cause this, as can too many
+     | operations being directed to a single execution port (for example, more
+     | multiply operations arriving in the back-end per cycle than the execution
+     | unit can support).
+     |
+        Memory Bound: 30.2% of Pipeline Slots
+         | The metric value is high. This can indicate that the significant
+         | fraction of execution pipeline slots could be stalled due to demand
+         | memory load and stores. Use Memory Access analysis to have the metric
+         | breakdown by memory hierarchy, memory bandwidth information,
+         | correlation by memory objects.
+         |
+            L1 Bound: 20.1% of Clockticks
+             | This metric shows how often machine was stalled without missing
+             | the L1 data cache. The L1 cache typically has the shortest
+             | latency. However, in certain cases like loads blocked on older
+             | stores, a load might suffer a high latency even though it is
+             | being satisfied by the L1. Note that this metric value may be
+             | highlighted due to DTLB Overhead or Cycles of 1 Port Utilized
+             | issues.
+             |
+                FB Full: 54.5% of Clockticks
+                 | This metric does a rough estimation of how often L1D Fill
+                 | Buffer unavailability limited additional L1D miss memory
+                 | access requests to proceed. The higher the metric value, the
+                 | deeper the memory hierarchy level the misses are satisfied
+                 | from. Often it hints on approaching bandwidth limits (to L2
+                 | cache, L3 cache or external memory). Avoid adding software
+                 | prefetches if indeed memory BW limited.
+                 |
+            L2 Bound: 0.2% of Clockticks
+            L3 Bound: 3.3% of Clockticks
+                L3 Latency: 6.4% of Clockticks
+            DRAM Bound: 8.1% of Clockticks
+                Memory Bandwidth: 2.6% of Clockticks
+                Memory Latency: 18.7% of Clockticks
+                    Local DRAM: 3.9% of Clockticks
+                    Remote DRAM: 0.1% of Clockticks
+                    Remote Cache: 0.5% of Clockticks
+            Store Bound: 7.3% of Clockticks
+        Core Bound: 25.8% of Pipeline Slots
+         | This metric represents how much Core non-memory issues were of a
+         | bottleneck. Shortage in hardware compute resources, or dependencies
+         | software's instructions are both categorized under Core Bound. Hence
+         | it may indicate the machine ran out of an OOO resources, certain
+         | execution units are overloaded or dependencies in program's data- or
+         | instruction- flow are limiting the performance (e.g. FP-chained long-
+         | latency arithmetic operations).
+         |
+Memory Bound: 30.2% of Pipeline Slots
+ | The metric value is high. This can indicate that the significant fraction of
+ | execution pipeline slots could be stalled due to demand memory load and
+ | stores. Use Memory Access analysis to have the metric breakdown by memory
+ | hierarchy, memory bandwidth information, correlation by memory objects.
+ |
+    Cache Bound: 23.6% of Clockticks
+     | A significant proportion of cycles are being spent on data fetches from
+     | caches. Check Memory Access analysis to see if accesses to L2 or L3
+     | caches are problematic and consider applying the same performance tuning
+     | as you would for a cache-missing workload. This may include reducing the
+     | data working set size, improving data access locality, blocking or
+     | partitioning the working set to fit in the lower cache levels, or
+     | exploiting hardware prefetchers. Consider using software prefetchers, but
+     | note that they can interfere with normal loads, increase latency, and
+     | increase pressure on the memory system. This metric includes coherence
+     | penalties for shared data. Check Microarchitecture Exploration analysis
+     | to see if contested accesses or data sharing are indicated as likely
+     | issues.
+     |
+    DRAM Bound: 8.1% of Clockticks
+        Average DRAM Bandwidth, GB/s: 0.000
+    NUMA: % of Remote Accesses: 19.0%
+Vectorization: 0.0% of Packed FP Operations
+    Instruction Mix
+        SP FLOPs: 0.0% of uOps
+            Packed: 0.0% from SP FP
+                128-bit: 0.0% from SP FP
+                256-bit: 0.0% from SP FP
+                512-bit: 0.0% from SP FP
+            Scalar: 100.0% from SP FP
+        DP FLOPs: 0.6% of uOps
+            Packed: 0.0% from DP FP
+                128-bit: 0.0% from DP FP
+                256-bit: 0.0% from DP FP
+                512-bit: 0.0% from DP FP
+            Scalar: 100.0% from DP FP
+        x87 FLOPs: 0.3% of uOps
+        Non-FP: 99.1% of uOps
+    FP Arith/Mem Rd Instr. Ratio: 0.039
+    FP Arith/Mem Wr Instr. Ratio: 0.084
+Collection and Platform Info
+    Application Command Line: ./smoothxg "--threads=32" "--gfa-in=/home/bc526/characterize_pggb/dataset/scerevisiae8/scerevisiae8.fa.gz.seqwish.gfa" "--smoothed-out=scerevisiae8.fa.gz.smoothxg.gfa" "-T" "2" "-r" "12" "-P" "1,19,39,3,81,1" "-V" "-X" "100" "-I" "0.9" "-R" "0" "-j" "0" "-e" "0" "-l" "700,900,1100" "-O" "0.001" "-Y" "1200" "-d" "0" "-D" "0" 
+    Operating System: 3.10.0-1160.76.1.el7.x86_64 \S Kernel \r on an \m 
+    Computer Name: zhang-24.ece.cornell.edu
+    Result Size: 25.7 MB 
+    Collection start time: 20:45:20 10/12/2023 UTC
+    Collection stop time: 21:15:54 10/12/2023 UTC
+    Collector Type: Driverless Perf per-process counting
+    CPU
+        Name: Intel(R) Xeon(R) Processor code named Cascadelake
+        Frequency: 3.392 GHz
+        Logical CPU Count: 32
+        Max DRAM Single-Package Bandwidth: 89.000 GB/s
+        LLC size: 37.5 MB 
+        Cache Allocation Technology
+            Level 2 capability: not detected
+            Level 3 capability: available
+
+Recommendations:
+    Hotspots: Start with Hotspots analysis to understand the efficiency of your algorithm.
+     | Use Hotspots analysis to identify the most time consuming functions.
+     | Drill down to see the time spent on every line of code.
+    Threading: There is poor utilization of logical CPU cores (6.7%) in your application.
+     |  Use Threading to explore more opportunities to increase parallelism in
+     | your application.
+    Microarchitecture Exploration: There is low microarchitecture usage (29.5%) of available hardware resources.
+     | Run Microarchitecture Exploration analysis to analyze CPU
+     | microarchitecture bottlenecks that can affect application performance.
+    Memory Access: The Memory Bound metric is high  (30.2%). A significant fraction of execution pipeline slots could be stalled due to demand memory load and stores.
+     | Use Memory Access analysis to measure metrics that can identify memory
+     | access issues.
+
+If you want to skip descriptions of detected performance issues in the report,
+enter: vtune -report summary -report-knob show-issues=false -r <my_result_dir>.
+Alternatively, you may view the report in the csv format: vtune -report
+<report_name> -format=csv.
